@@ -44,7 +44,7 @@ function Recap() {
           Votre accès Wrysst inclut l'assurance complète vol et casse, l'entretien par un maître
           horloger agréé, le polissage avant chaque livraison, et la flexibilité totale de changer
           de montre à la demande.
-          <img src="src/assets/icons/axa.svg" alt="AXA" className="absolute right-4 top-full-translate-y-1/2 w-9 h-9" />
+          <img src="src/assets/images/axa.svg" alt="AXA" className="absolute right-4 top-full-translate-y-1/2 w-9 h-9" />
         </div>
 
         <button

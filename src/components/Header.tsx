@@ -1,9 +1,19 @@
 import { Link } from "@tanstack/react-router";
-import { Heart, Search, User, MapPin } from "lucide-react";
+import { Heart, Search, User, MapPin, ChevronDown } from "lucide-react";
 import { useAppStore } from "@/lib/store";
+import { brands } from "@/lib/watches";
+import { useState } from "react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function Header() {
-  const { program, city, favorites } = useAppStore();
+  const { program, city, favorites, selectedBrand, setSelectedBrand } = useAppStore();
+  const [valeur, setValeur] = useState("");
   return (
     <>
       <header className="sticky top-0 z-50 bg-white border-b border-border">
@@ -16,10 +26,28 @@ export function Header() {
                 placeholder="Rechercher une montre..."
                 className="w-full h-10 rounded-full bg-secondary pl-11 pr-4 text-sm outline-none focus:ring-2 focus:ring-primary"
               />
+              
+              <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex items-center gap-1 text-sm bg-white rounded-full px-2.5 py-1.5 hover:border-boder">
+                    {selectedBrand}
+                    <ChevronDown className="w-3 h-3" strokeWidth={1.5} />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-[160px]">
+                    {brands.map((b) => (
+                      <DropdownMenuItem key={b} onClick={() => setSelectedBrand(b)}>
+                        {b}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
+
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <span className={`hidden sm:inline-flex text-[10px] tracking-widest font-bold px-2.5 py-1 rounded ${program === "BLACK EDITION" ? "bg-black-edition text-black-edition-foreground" : "bg-primary text-primary-foreground"}`}>
+            <span className={`hidden sm:inline-flex text-[10px] tracking-widest font-bold px-2.75 py-1.75 rounded ${program === "BLACK EDITION" ? "bg-black-edition text-black-edition-foreground" : "bg-primary text-primary-foreground"}`}>
               {program}
             </span>
             <Link to="/dashboard" className="relative p-2 hover:bg-secondary rounded-full">
@@ -51,14 +79,19 @@ function CityChanger() {
   const { city, setCity } = useAppStore();
   const cities: ("Paris" | "Lyon" | "Bordeaux" | "Marseille")[] = ["Paris", "Lyon", "Bordeaux", "Marseille"];
   return (
-    <select
-      value={city}
-      onChange={(e) => setCity(e.target.value as any)}
-      className="bg-transparent text-xs underline cursor-pointer outline-none"
-    >
-      {cities.map((c) => (
-        <option key={c} value={c} className="text-foreground">Changer de ville · {c}</option>
-      ))}
-    </select>
+    <DropdownMenu>
+      <DropdownMenuTrigger className="flex items-center gap-1 text-sm text-black bg-white rounded-full px-3 py-1.25 hover:text-foreground">
+        {city}
+        <ChevronDown className="w-3 h-3" strokeWidth={1.5} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-[160px]">
+        {cities.map((c) => (
+          <DropdownMenuItem key={c} onClick={() => setCity(c)}>
+            {c}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
+

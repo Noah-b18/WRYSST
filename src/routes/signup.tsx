@@ -9,9 +9,9 @@ export const Route = createFileRoute("/signup")({
 });
 
 const cities: { name: City; x: number; y: number }[] = [
-  { name: "Paris", x: 250, y: 110 },
-  { name: "Lyon", x: 310, y: 230 },
-  { name: "Bordeaux", x: 170, y: 290 },
+  { name: "Paris", x: 240, y: 120 },
+  { name: "Lyon", x: 350, y: 230 },
+  { name: "Bordeaux", x: 130, y: 290 },
   { name: "Marseille", x: 320, y: 340 },
 ];
 
@@ -36,7 +36,9 @@ function Signup() {
       <div className="flex items-center gap-3 mb-12">
         {[1, 2, 3].map((n) => (
           <div key={n} className="flex items-center gap-3">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${step >= n ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}>
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${step >= n ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}
+            >
               {step > n ? <Check className="w-4 h-4" /> : n}
             </div>
             {n < 3 && <div className={`w-12 h-0.5 ${step > n ? "bg-primary" : "bg-border"}`} />}
@@ -44,34 +46,69 @@ function Signup() {
         ))}
       </div>
 
-      <div className="w-full max-w-[480px]">
+      <div className="w-full flex-1 flex justify-center">
         {step === 1 && (
-          <div>
+          <div className="max-w-[480px]">
             <h1 className="font-display font-bold text-4xl uppercase">Créez votre compte</h1>
             <p className="text-sm text-muted-foreground mt-2">Accès réservé aux membres Wrysst.</p>
-            <form onSubmit={(e) => { e.preventDefault(); setStep(2); }} className="space-y-5 mt-8">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setStep(2);
+              }}
+              className="space-y-5 mt-8"
+            >
               <div className="grid grid-cols-2 gap-3">
-                <Field label="PRÉNOM"><input className="input" required /></Field>
-                <Field label="NOM"><input className="input" required /></Field>
+                <Field label="PRÉNOM">
+                  <input className="input" required />
+                </Field>
+                <Field label="NOM">
+                  <input className="input" required />
+                </Field>
               </div>
               <Field label="DATE DE NAISSANCE">
                 <div className="grid grid-cols-3 gap-2">
-                  <select className="input"><option>Jour</option>{Array.from({length:31},(_,i)=><option key={i}>{i+1}</option>)}</select>
-                  <select className="input"><option>Mois</option>{["Jan","Fév","Mar","Avr","Mai","Jun","Jul","Aoû","Sep","Oct","Nov","Déc"].map(m=><option key={m}>{m}</option>)}</select>
-                  <select className="input"><option>Année</option>{Array.from({length:60},(_,i)=><option key={i}>{2008-i}</option>)}</select>
+                  <select className="input">
+                    <option>Jour</option>
+                    {Array.from({ length: 31 }, (_, i) => (
+                      <option key={i}>{i + 1}</option>
+                    ))}
+                  </select>
+                  <select className="input">
+                    <option>Mois</option>
+                    {["Jan", "Fév", "Mar", "Avr", "Mai", "Jun", "Jul", "Aoû", "Sep", "Oct", "Nov", "Déc"].map(
+                      (m) => (
+                        <option key={m}>{m}</option>
+                      ),
+                    )}
+                  </select>
+                  <select className="input">
+                    <option>Année</option>
+                    {Array.from({ length: 60 }, (_, i) => (
+                      <option key={i}>{2008 - i}</option>
+                    ))}
+                  </select>
                 </div>
               </Field>
-              <Field label="EMAIL"><input type="email" className="input" required /></Field>
+              <Field label="EMAIL">
+                <input type="email" className="input" required />
+              </Field>
               <Field label="TÉLÉPHONE">
                 <div className="grid grid-cols-[80px_1fr] gap-2">
-                  <select className="input"><option>+33</option></select>
+                  <select className="input">
+                    <option>+33</option>
+                  </select>
                   <input className="input" />
                 </div>
               </Field>
               <Field label="MOT DE PASSE">
                 <div className="relative">
-                  <input type={showPwd?"text":"password"} className="input pr-10" required />
-                  <button type="button" onClick={()=>setShowPwd(!showPwd)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                  <input type={showPwd ? "text" : "password"} className="input pr-10" required />
+                  <button
+                    type="button"
+                    onClick={() => setShowPwd(!showPwd)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                  >
                     {showPwd ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
@@ -82,15 +119,22 @@ function Signup() {
               <label className="flex items-center gap-2 text-sm">
                 <input type="checkbox" required /> J'accepte les conditions d'utilisation
               </label>
-              <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-bold tracking-wider text-sm hover:bg-primary/90">CONTINUER →</button>
+              <button
+                type="submit"
+                className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-bold tracking-wider text-sm hover:bg-primary/90"
+              >
+                CONTINUER →
+              </button>
             </form>
           </div>
         )}
 
         {step === 2 && (
-          <div className="text-center">
+          <div className="text-center max-w-[480px]">
             <h1 className="font-display font-bold text-4xl uppercase">Où êtes-vous ?</h1>
-            <p className="text-sm text-muted-foreground mt-2">Votre catalogue affichera en priorité les montres disponibles dans votre secteur.</p>
+            <p className="text-sm text-muted-foreground mt-2">
+              Votre catalogue affichera en priorité les montres disponibles dans votre secteur.
+            </p>
             <input
               placeholder="Entrez votre ville ou code postal..."
               className="input w-full mt-6 text-center"
@@ -99,15 +143,29 @@ function Signup() {
             />
             <div className="mt-6 flex justify-center">
               <svg viewBox="0 0 500 450" className="w-full max-w-sm">
-                {/* simplified France shape */}
-                <path d="M150 80 Q220 60 290 80 Q360 100 380 180 Q400 260 360 340 Q320 400 240 410 Q160 400 110 340 Q80 260 100 180 Q120 100 150 80 Z"
-                  fill="#0047FF" opacity="0.15" stroke="#0047FF" strokeWidth="1.5" />
+                {/* Hexagone représentant la France */}
+                <polygon
+                  points="240,40 410,137.5 410,312.5 240,410 70,312.5 70,137.5"
+                  fill="#0047FF"
+                  opacity="0.15"
+                  stroke="#0047FF"
+                  strokeWidth="1.5"
+                />
+
                 {cities.map((c) => {
                   const active = selectedCity === c.name;
                   return (
                     <g key={c.name} className="cursor-pointer" onClick={() => setSelectedCity(c.name)}>
                       <circle cx={c.x} cy={c.y} r={active ? 12 : 7} fill={active ? "#0047FF" : "#0A0A0A"} />
-                      <text x={c.x} y={c.y - 16} textAnchor="middle" className="text-xs font-bold" fill={active ? "#0047FF" : "#0A0A0A"}>{c.name}</text>
+                      <text
+                        x={c.x}
+                        y={c.y - 16}
+                        textAnchor="middle"
+                        className="text-xs font-bold"
+                        fill={active ? "#0047FF" : "#0A0A0A"}
+                      >
+                        {c.name}
+                      </text>
                     </g>
                   );
                 })}
@@ -117,17 +175,22 @@ function Signup() {
               disabled={!selectedCity}
               onClick={() => setStep(3)}
               className="w-full mt-6 bg-primary text-primary-foreground py-3.5 rounded-md font-bold tracking-wider text-sm disabled:opacity-40 hover:bg-primary/90"
-            >VALIDER MA VILLE →</button>
+            >
+              VALIDER MA VILLE →
+            </button>
           </div>
         )}
 
         {step === 3 && (
-          <div className="w-full max-w-[920px] -mx-4">
-            <div className="text-center px-4">
-              <h1 className="font-display font-bold text-4xl uppercase">Votre niveau d'accès</h1>
-              <p className="text-sm text-muted-foreground mt-2">Vous pourrez le modifier à tout moment.</p>
+          <div className="w-full max-w-5xl">
+            <div className="text-center px-4 sm:px-6">
+              <h1 className="font-display font-bold text-3xl sm:text-4xl uppercase">Votre niveau d'accès</h1>
+              <p className="text-sm text-muted-foreground mt-2 max-w-sm mx-auto">
+                Vous pourrez le modifier à tout moment.
+              </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-4 mt-8 px-4">
+
+            <div className="grid gap-4 md:grid-cols-3 mt-8 px-4 sm:px-6">
               {programs.map((p) => {
                 const active = selectedProgram === p.name;
                 const isBlack = p.name === "BLACK EDITION";
@@ -135,19 +198,74 @@ function Signup() {
                   <button
                     key={p.name}
                     onClick={() => setSelectedProgram(p.name)}
-                    className={`text-left p-6 rounded-lg border-2 transition ${active ? "border-primary" : "border-border hover:border-foreground"} ${isBlack && active ? "bg-black-edition text-black-edition-foreground border-black-edition" : ""}`}
+                    className={`relative flex min-h-[250px] flex-col rounded-lg border-2 p-5 text-left transition duration-200 ${
+                      active
+                        ? isBlack
+                          ? "border-black-edition bg-black-edition text-white shadow-[0_18px_38px_rgba(0,0,0,0.22)]"
+                          : "border-primary bg-white shadow-[0_18px_38px_rgba(0,71,255,0.14)]"
+                        : "border-border bg-secondary/50 text-foreground hover:border-foreground/40 hover:bg-white"
+                    }`}
                   >
-                    <p className="text-[10px] tracking-widest font-bold opacity-70">PROGRAMME</p>
-                    <p className="font-display font-bold text-xl mt-1">{p.name}</p>
-                    <p className="text-xs mt-1 opacity-70">{p.tagline}</p>
-                    <p className="font-display font-bold text-3xl mt-6">{p.price}€<span className="text-sm font-normal opacity-70"> / mois</span></p>
-                    <p className="text-xs mt-4 opacity-70">{p.brands}</p>
+                    <div
+                      className={`absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full border ${
+                        active
+                          ? isBlack
+                            ? "border-white bg-white text-black-edition"
+                            : "border-primary bg-primary text-primary-foreground"
+                          : "border-border bg-white"
+                      }`}
+                    >
+                      {active && <Check className="h-4 w-4" />}
+                    </div>
+
+                    <div className="pr-10">
+                      <div
+                        className={`text-[10px] font-bold uppercase tracking-widest ${
+                          isBlack ? "text-white/60" : "text-muted-foreground"
+                        }`}
+                      >
+                        Programme
+                      </div>
+                      <div className="font-display mt-2 text-2xl font-bold uppercase leading-tight">{p.name}</div>
+                      <div className={`mt-2 text-sm ${isBlack ? "text-white/70" : "text-muted-foreground"}`}>
+                        {p.tagline}
+                      </div>
+                    </div>
+
+                    <div
+                      className={`mt-7 rounded-md border p-4 ${
+                        isBlack ? "border-white/15 bg-white/8" : "border-border bg-white"
+                      }`}
+                    >
+                      <div className="font-display text-4xl font-bold leading-none">
+                        {p.price}€
+                        <span
+                          className={`ml-1 text-sm font-normal ${
+                            isBlack ? "text-white/60" : "text-muted-foreground"
+                          }`}
+                        >
+                          / mois
+                        </span>
+                      </div>
+                    </div>
+
+                    <div
+                      className={`mt-auto pt-5 text-xs leading-relaxed ${
+                        isBlack ? "text-white/68" : "text-muted-foreground"
+                      }`}
+                    >
+                      {p.brands}
+                    </div>
                   </button>
                 );
               })}
             </div>
-            <div className="px-4 mt-8">
-              <button onClick={finish} className="w-full bg-primary text-primary-foreground py-3.5 rounded-md font-bold tracking-wider text-sm hover:bg-primary/90">
+
+            <div className="px-4 sm:px-6 mt-8">
+              <button
+                onClick={finish}
+                className="w-full rounded-md bg-primary py-3.5 text-sm font-bold tracking-wider text-primary-foreground shadow-[0_16px_36px_rgba(0,71,255,0.22)] transition hover:bg-primary/90"
+              >
                 ACCÉDER À MON CATALOGUE →
               </button>
             </div>

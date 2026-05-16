@@ -11,19 +11,18 @@ export const Route = createFileRoute("/")({
 });
 
 function Catalogue() {
-  const { city } = useAppStore();
-  const [brand, setBrand] = useState("TOUTES");
+  const { city, selectedBrand, setSelectedBrand } = useAppStore();
   const [category, setCategory] = useState<string | null>(null);
   const [sort, setSort] = useState("dispo");
 
   const filtered = useMemo(() => {
     let list = [...watches];
-    if (brand !== "TOUTES") list = list.filter((w) => w.brand === brand);
+    if (selectedBrand !== "TOUTES") list = list.filter((w) => w.brand === selectedBrand);
     if (category) list = list.filter((w) => w.category === category);
     if (sort === "asc") list.sort((a, b) => a.price - b.price);
     if (sort === "desc") list.sort((a, b) => b.price - a.price);
     return list;
-  }, [brand, category, sort]);
+  }, [selectedBrand, category, sort]);
 
   const inZone = filtered.filter((w) => w.city === city);
   const outZone = filtered.filter((w) => w.city !== city);
@@ -37,9 +36,9 @@ function Catalogue() {
         <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center gap-3 overflow-x-auto">
           <button
             onClick={() => setCategory(null)}
-            className={`shrink-0 flex flex-col items-center gap-1 px-3 py-2 rounded-lg ${!category ? "bg-foreground text-background" : "hover:bg-secondary"}`}
+            className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg ${!category ? "bg-foreground text-background" : "hover:bg-secondary"}`}
           >
-            <Grid3x3 className="w-5 h-5" strokeWidth={1.5} />
+            <Grid3x3 className="w-3.5 h-3.5" strokeWidth={1.5} />
             <span className="text-[10px] tracking-wider font-bold">TOUT</span>
           </button>
           {categories.map((c) => (
@@ -60,13 +59,13 @@ function Catalogue() {
           {brands.map((b) => (
             <button
               key={b}
-              onClick={() => setBrand(b)}
-              className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider transition ${brand === b ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+              onClick={() => setSelectedBrand(b)}
+              className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider transition ${selectedBrand === b ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
             >
               {b}
             </button>
           ))}
-          <div className="ml-auto shrink-0">
+          {/* <div className="ml-auto shrink-0">
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
@@ -76,21 +75,27 @@ function Catalogue() {
               <option value="asc">Prix ↑</option>
               <option value="desc">Prix ↓</option>
             </select>
-          </div>
+          </div> */}
         </div>
       </div>
 
       {/* Grid */}
       <main className="max-w-[1400px] mx-auto px-6 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {inZone.map((w) => <WatchCard key={w.id} watch={w} />)}
+          {inZone.map((w) => (
+            <WatchCard key={w.id} watch={w} />
+          ))}
         </div>
 
         {outZone.length > 0 && (
           <section className="mt-16">
-            <h2 className="font-display font-bold text-xl tracking-wider mb-6">ÉGALEMENT DISPONIBLE — AUTRES VILLES</h2>
+            <h2 className="font-display font-bold text-xl tracking-wider mb-6">
+              ÉGALEMENT DISPONIBLE — AUTRES VILLES
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {outZone.map((w) => <WatchCard key={w.id} watch={w} />)}
+              {outZone.map((w) => (
+                <WatchCard key={w.id} watch={w} />
+              ))}
             </div>
           </section>
         )}
@@ -107,28 +112,40 @@ function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
         <div>
           <p className="font-display font-bold tracking-[0.15em] mb-4">WRYSST</p>
-          <p className="text-muted-foreground text-xs">Changez quand vous voulez.<br />L'accès, pas la propriété.</p>
+          <p className="text-muted-foreground text-xs">
+            Changez quand vous voulez.
+            <br />
+            L'accès, pas la propriété.
+          </p>
         </div>
         <div>
           <p className="font-bold text-xs tracking-widest mb-3">TYPES</p>
           <ul className="space-y-2 text-xs text-muted-foreground">
-            <li>Plongée</li><li>Habillée</li><li>Chrono</li><li>Iconique</li>
+            <li>Plongée</li>
+            <li>Habillée</li>
+            <li>Chrono</li>
+            <li>Iconique</li>
           </ul>
         </div>
         <div>
           <p className="font-bold text-xs tracking-widest mb-3">PROGRAMMES</p>
           <ul className="space-y-2 text-xs text-muted-foreground">
-            <li>Premium</li><li>Luxury</li><li>Black Edition</li>
+            <li>Premium</li>
+            <li>Luxury</li>
+            <li>Black Edition</li>
           </ul>
         </div>
         <div>
           <p className="font-bold text-xs tracking-widest mb-3">CONTACT</p>
           <ul className="space-y-2 text-xs text-muted-foreground">
-            <li>hello@wrysst.com</li><li>+33 1 23 45 67 89</li>
+            <li>hello@wrysst.com</li>
+            <li>+33 1 23 45 67 89</li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">© 2026 WRYSST. Tous droits réservés.</div>
+      <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
+        © 2026 WRYSST. Tous droits réservés.
+      </div>
     </footer>
   );
 }

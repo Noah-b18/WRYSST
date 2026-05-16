@@ -5,16 +5,20 @@ import { watches } from "@/lib/watches";
 import { WatchCard } from "@/components/WatchCard";
 import { Watch as WatchIcon, RefreshCw, Heart, Ticket, History, Settings } from "lucide-react";
 import { useState } from "react";
+import { storeAddresses } from "@/lib/storeAddresses";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
 });
 
 function Dashboard() {
-  const { selectedWatchId, favorites, program } = useAppStore();
+  const { selectedWatchId, favorites, program, city } = useAppStore();
   const current = watches.find((w) => w.id === selectedWatchId) ?? watches[0];
   const favs = watches.filter((w) => favorites.includes(w.id));
   const [tab, setTab] = useState("current");
+  const storeAddress =
+    (storeAddresses as { [key: string]: string })[city.toLowerCase()] ||
+    "Boutique partenaire proche de vous";
 
   const nav = [
     { id: "current", label: "MA MONTRE EN COURS", icon: WatchIcon },
@@ -28,7 +32,7 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <div className="max-w-[1400px] mx-auto px-6 py-10 grid lg:grid-cols-[260px_1fr] gap-10">
+      <div className="site-container py-10 grid lg:grid-cols-[260px_1fr] gap-10">
         <aside>
           <nav className="flex lg:flex-col gap-1 overflow-x-auto">
             {nav.map((n) => (
@@ -64,7 +68,7 @@ function Dashboard() {
                   <p className="text-sm text-muted-foreground mt-1">Réf. {current.ref}</p>
                   <p className="text-sm mt-4">Depuis le 09/05/2026</p>
                   <button
-                    className="mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-md font-bold tracking-wider text-sm self-start"
+                    className="mt-6 bg-primary text-primary-foreground px-4 sm:px-6 py-3 rounded-md font-bold tracking-wider text-sm self-start"
                     onClick={() => setTab("swap")}
                   >
                     CHANGER DE MONTRE →
@@ -84,18 +88,16 @@ function Dashboard() {
                 Demander un échange
               </h1>
               <div className="space-y-4">
-                <label className="flex items-center gap-3 p-4 border border-border rounded-md cursor-pointer hover:border-foreground">
+                {/* <label className="flex items-center gap-3 p-4 border border-border rounded-md cursor-pointer hover:border-foreground">
                   <input type="radio" name="swap" defaultChecked /> Recevoir la suivante (livraison
                   48H)
-                </label>
-                <label className="flex items-center gap-3 p-4 border border-border rounded-md cursor-pointer hover:border-foreground">
-                  <input type="radio" name="swap" /> Passer en boutique
-                </label>
+                </label> */}
+                <p>La boutique la plus proche de vous : {storeAddress}</p>
                 <textarea
                   placeholder="Préférences pour la prochaine montre ?"
                   className="w-full border border-border rounded-md p-3 text-sm h-24 outline-none focus:border-primary"
                 />
-                <button className="bg-primary text-primary-foreground px-6 py-3 rounded-md font-bold tracking-wider text-sm">
+                <button className="bg-primary text-primary-foreground px-4 sm:px-6 py-3 rounded-md font-bold tracking-wider text-sm">
                   VALIDER MON ÉCHANGE →
                 </button>
               </div>

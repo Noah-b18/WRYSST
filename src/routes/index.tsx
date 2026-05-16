@@ -33,7 +33,7 @@ function Catalogue() {
 
       {/* Categories ribbon */}
       <div className="border-b border-border bg-white">
-        <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center gap-3 overflow-x-auto">
+        <div className="site-container py-4 flex items-center gap-3 overflow-x-auto">
           <button
             onClick={() => setCategory(null)}
             className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg ${!category ? "bg-foreground text-background" : "hover:bg-secondary"}`}
@@ -55,7 +55,7 @@ function Catalogue() {
 
       {/* Brand pills */}
       <div className="border-b border-border">
-        <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center gap-2 overflow-x-auto">
+        <div className="site-container py-4 flex items-center gap-2 overflow-x-auto">
           {brands.map((b) => (
             <button
               key={b}
@@ -80,7 +80,7 @@ function Catalogue() {
       </div>
 
       {/* Grid */}
-      <main className="max-w-[1400px] mx-auto px-6 py-8">
+      <main className="site-container py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {inZone.map((w) => (
             <WatchCard key={w.id} watch={w} />
@@ -109,7 +109,7 @@ function Catalogue() {
 function Footer() {
   return (
     <footer className="border-t border-border mt-20">
-      <div className="max-w-[1400px] mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+      <div className="site-container py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm">
         <div>
           <p className="font-display font-bold tracking-[0.15em] mb-4">WRYSST</p>
           <p className="text-muted-foreground text-xs">

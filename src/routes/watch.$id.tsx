@@ -27,9 +27,9 @@ function WatchDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-25">
+    <div className="min-h-screen bg-white pb-50">
       <Header />
-      <div className="max-w-[1400px] mx-auto px-6 py-10 grid lg:grid-cols-[55%_45%] gap-12">
+      <div className="site-container py-10 grid grid-cols-1 lg:grid-cols-[55%_45%] gap-12">
         <div>
           <div className="aspect-square bg-secondary rounded-lg overflow-hidden">
             <img
@@ -42,7 +42,7 @@ function WatchDetail() {
             {[0, 1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="w-20 h-20 bg-secondary rounded border border-border overflow-hidden"
+                className="w-14 h-14 sm:w-20 sm:h-20 bg-secondary rounded border border-border overflow-hidden"
               >
                 <img src={watch.image} alt="" className="w-full h-full object-cover opacity-70" />
               </div>
@@ -143,7 +143,7 @@ function WatchDetail() {
 
       {/* Inclus */}
       <section className="bg-secondary border-y border-border mt-12">
-        <div className="max-w-[1400px] mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="site-container py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {[
             [Shield, "Assurance complète vol & casse"],
             [Sparkles, "Entretien maître horloger"],
@@ -159,8 +159,8 @@ function WatchDetail() {
       </section>
 
       {/* Sticky reserve bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.06)] z-40">
-        <div className="max-w-[1400px] mx-auto px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.06)] z-40 safe-bottom">
+        <div className="site-container py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <p className="text-[10px] tracking-widest font-medium text-muted-foreground">
               MENSUALITÉ
@@ -173,13 +173,13 @@ function WatchDetail() {
           <div className="flex flex-col sm:flex-row gap-2">
             <button
               onClick={() => handleReserve(true)}
-              className="bg-foreground text-background px-6 py-3 rounded-md text-sm font-bold tracking-wider hover:bg-foreground/90 transition"
+              className="bg-foreground text-background px-4 sm:px-6 py-3 rounded-md text-sm font-bold tracking-wider hover:bg-foreground/90 transition"
             >
               RÉSERVER (J'AI UN COMPTE) →
             </button>
             <button
               onClick={() => handleReserve(false)}
-              className="bg-primary text-primary-foreground px-6 py-3 rounded-md text-sm font-bold tracking-wider hover:bg-primary/90 transition"
+              className="bg-primary text-primary-foreground px-4 sm:px-6 py-3 rounded-md text-sm font-bold tracking-wider hover:bg-primary/90 transition"
             >
               RÉSERVER (NOUVEAU) →
             </button>

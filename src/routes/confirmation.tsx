@@ -14,12 +14,14 @@ function Confirmation() {
   const { selectedWatchId, city } = useAppStore();
   const watch = watches.find((w) => w.id === selectedWatchId) ?? watches[0];
 
-  const storeAddress = (storeAddresses as { [key: string]: string })[city.toLowerCase()] || "Boutique partenaire proche de vous";
+  const storeAddress =
+    (storeAddresses as { [key: string]: string })[city.toLowerCase()] ||
+    "Boutique partenaire proche de vous";
 
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <div className="max-w-2xl mx-auto text-center px-6 py-20">
+      <div className="max-w-2xl mx-auto text-center px-4 sm:px-6 py-20">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -29,7 +31,7 @@ function Confirmation() {
           <Check className="w-10 h-10 text-primary-foreground" strokeWidth={3} />
         </motion.div>
 
-        <h1 className="font-display font-bold text-5xl md:text-6xl uppercase mt-8 tracking-tight">
+        <h1 className="font-display font-bold text-4xl md:text-5xl uppercase mt-8 tracking-tight">
           C'est confirmé.
         </h1>
         <p className="text-muted-foreground mt-3">
@@ -40,9 +42,7 @@ function Confirmation() {
           <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-muted-foreground">
             <Truck className="w-4 h-4" strokeWidth={1.5} /> RÉCUPERATION
           </div>
-          <p className="font-display font-bold text-lg mt-2 uppercase">
-            À {city}
-          </p>
+          <p className="font-display font-bold text-lg mt-2 uppercase">À {city}</p>
           <p className="text-sm text-muted-foreground mt-2">
             Vous pouvez récupérer la montre dans une boutique partenaire.
           </p>
@@ -54,13 +54,13 @@ function Confirmation() {
         <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8">
           <Link
             to="/dashboard"
-            className="bg-primary text-primary-foreground px-6 py-3 rounded-md font-bold tracking-wider text-sm"
+            className="bg-primary text-primary-foreground px-4 sm:px-6 py-3 rounded-md font-bold tracking-wider text-sm"
           >
             MON DASHBOARD
           </Link>
           <Link
             to="/"
-            className="border border-border px-6 py-3 rounded-md font-bold tracking-wider text-sm hover:border-foreground"
+            className="border border-border px-4 sm:px-6 py-3 rounded-md font-bold tracking-wider text-sm hover:border-foreground"
           >
             REVENIR AU CATALOGUE
           </Link>
@@ -69,4 +69,3 @@ function Confirmation() {
     </div>
   );
 }
-

@@ -96,4 +96,37 @@
     font-weight: 700;
     letter-spacing: 0.02em;
   }
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Site container: centralise le contenu et gère le padding responsive */
+  .site-container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* 16px */
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .site-container {
+      padding-left: 1.5rem; /* 24px */
+      padding-right: 1.5rem;
+    }
+  }
+
+  /* Ensure small circular images don't overflow on mobile */
+  img.rounded-full,
+  .rounded-full img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Safe area helper for iOS bottom inset */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
 }

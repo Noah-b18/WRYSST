@@ -4,6 +4,7 @@ import { watches } from "@/lib/watches";
 import { Header } from "@/components/Header";
 import { Truck, Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { storeAddresses } from "@/lib/storeAddresses";
 
 export const Route = createFileRoute("/confirmation")({
   component: Confirmation,
@@ -12,6 +13,8 @@ export const Route = createFileRoute("/confirmation")({
 function Confirmation() {
   const { selectedWatchId, city } = useAppStore();
   const watch = watches.find((w) => w.id === selectedWatchId) ?? watches[0];
+
+  const storeAddress = (storeAddresses as { [key: string]: string })[city.toLowerCase()] || "Boutique partenaire proche de vous";
 
   return (
     <div className="min-h-screen bg-white">
@@ -30,19 +33,21 @@ function Confirmation() {
           C'est confirmé.
         </h1>
         <p className="text-muted-foreground mt-3">
-          Votre {watch.brand} {watch.model} arrive sous 48h.
+          Votre {watch.brand} {watch.model} est prête à être récupérée.
         </p>
 
         <div className="border border-border rounded-lg p-6 mt-10 text-left">
           <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-muted-foreground">
-            <Truck className="w-4 h-4" strokeWidth={1.5} /> LIVRAISON
+            <Truck className="w-4 h-4" strokeWidth={1.5} /> RÉCUPERATION
           </div>
           <p className="font-display font-bold text-lg mt-2 uppercase">
-            À {city} — sous 48H ouvrables
+            À {city}
           </p>
           <p className="text-sm text-muted-foreground mt-2">
-            Vous recevrez un email avec votre numéro de tracking. Vous pouvez aussi récupérer la
-            montre dans une boutique partenaire.
+            Vous pouvez récupérer la montre dans une boutique partenaire.
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            Adresse de la boutique : {storeAddress}
           </p>
         </div>
 
@@ -64,3 +69,4 @@ function Confirmation() {
     </div>
   );
 }
+

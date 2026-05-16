@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useAppStore } from "@/lib/store";
 import { watches } from "@/lib/watches";
+import axaLogo from "../assets/images/axa.svg";
 
 export const Route = createFileRoute("/recap")({
   component: Recap,
@@ -44,7 +45,7 @@ function Recap() {
           Votre accès Wrysst inclut l'assurance complète vol et casse, l'entretien par un maître
           horloger agréé, le polissage avant chaque livraison, et la flexibilité totale de changer
           de montre à la demande.
-          <img src="src/assets/images/axa.svg" alt="AXA" className="absolute right-4 top-full-translate-y-1/2 w-9 h-9" />
+          <img src={axaLogo} alt="AXA" className="absolute right-4 top-full-translate-y-1/2 w-9 h-9" />
         </div>
 
         <button

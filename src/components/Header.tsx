@@ -85,57 +85,57 @@ export function Header() {
             >
               <User className="h-5 w-5 shrink-0" strokeWidth={1.5} />
             </Link>
-          </div>
-          {/* Mobile menu trigger */}
-          <div className="ml-1 shrink-0 md:hidden">
-            <Drawer>
-              <DrawerTrigger asChild>
-                <button className="shrink-0 rounded-full p-2 hover:bg-secondary">
-                  <Menu className="h-5 w-5 shrink-0" />
-                </button>
-              </DrawerTrigger>
-              <DrawerContent>
-                <DrawerHeader>
-                  <div className="flex items-center justify-between w-full">
-                    <DrawerTitle>Menu</DrawerTitle>
-                    <DrawerClose asChild>
-                      <button className="shrink-0 rounded-full p-2 hover:bg-secondary">
-                        Fermer
-                      </button>
-                    </DrawerClose>
-                  </div>
-                  <DrawerDescription>Navigation et recherche</DrawerDescription>
-                </DrawerHeader>
-                <div className="p-4">
-                  <div className="mb-4">
-                    <div className="relative">
-                      <Search
-                        className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                        strokeWidth={1.5}
-                      />
-                      <input
-                        placeholder="Rechercher une montre..."
-                        className="w-full h-10 rounded-full bg-secondary pl-10 pr-4 text-sm outline-none"
-                      />
+            {/* Mobile menu trigger */}
+            <div className="ml-1 shrink-0 md:hidden">
+              <Drawer>
+                <DrawerTrigger asChild>
+                  <button className="shrink-0 rounded-full p-2 hover:bg-secondary">
+                    <Menu className="h-5 w-5 shrink-0" />
+                  </button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader>
+                    <div className="flex items-center justify-between w-full">
+                      <DrawerTitle>Menu</DrawerTitle>
+                      <DrawerClose asChild>
+                        <button className="shrink-0 rounded-full p-2 hover:bg-secondary">
+                          Fermer
+                        </button>
+                      </DrawerClose>
                     </div>
+                    <DrawerDescription>Navigation et recherche</DrawerDescription>
+                  </DrawerHeader>
+                  <div className="p-4">
+                    <div className="mb-4">
+                      <div className="relative">
+                        <Search
+                          className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                          strokeWidth={1.5}
+                        />
+                        <input
+                          placeholder="Rechercher une montre..."
+                          className="w-full h-10 rounded-full bg-secondary pl-10 pr-4 text-sm outline-none"
+                        />
+                      </div>
+                    </div>
+                    <nav className="flex flex-col gap-3">
+                      <Link to="/" className="font-medium">
+                        Accueil
+                      </Link>
+                      <Link to="/dashboard" className="font-medium">
+                        Mon compte
+                      </Link>
+                      <Link to="/signup" className="font-medium">
+                        S'inscrire
+                      </Link>
+                    </nav>
                   </div>
-                  <nav className="flex flex-col gap-3">
-                    <Link to="/" className="font-medium">
-                      Accueil
-                    </Link>
-                    <Link to="/dashboard" className="font-medium">
-                      Mon compte
-                    </Link>
-                    <Link to="/signup" className="font-medium">
-                      S'inscrire
-                    </Link>
-                  </nav>
-                </div>
-                <DrawerFooter>
-                  <div className="text-sm text-muted-foreground">© 2026 WRYSST</div>
-                </DrawerFooter>
-              </DrawerContent>
-            </Drawer>
+                  <DrawerFooter>
+                    <div className="text-sm text-muted-foreground">© 2026 WRYSST</div>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+            </div>
           </div>
         </div>
       </header>

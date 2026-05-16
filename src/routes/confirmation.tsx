@@ -21,7 +21,7 @@ function Confirmation() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <div className="max-w-2xl mx-auto text-center px-4 sm:px-6 py-20">
+      <div className="mx-auto max-w-2xl px-4 py-12 text-center sm:px-6 sm:py-20">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -31,18 +31,18 @@ function Confirmation() {
           <Check className="w-10 h-10 text-primary-foreground" strokeWidth={3} />
         </motion.div>
 
-        <h1 className="font-display font-bold text-4xl md:text-5xl uppercase mt-8 tracking-tight">
+        <h1 className="font-display mt-8 text-3xl font-bold uppercase tracking-tight sm:text-4xl md:text-5xl">
           C'est confirmé.
         </h1>
         <p className="text-muted-foreground mt-3">
           Votre {watch.brand} {watch.model} est prête à être récupérée.
         </p>
 
-        <div className="border border-border rounded-lg p-6 mt-10 text-left">
+        <div className="mt-10 rounded-lg border border-border p-4 text-left sm:p-6">
           <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-muted-foreground">
             <Truck className="w-4 h-4" strokeWidth={1.5} /> RÉCUPERATION
           </div>
-          <p className="font-display font-bold text-lg mt-2 uppercase">À {city}</p>
+          <p className="font-display mt-2 text-lg font-bold uppercase">À {city}</p>
           <p className="text-sm text-muted-foreground mt-2">
             Vous pouvez récupérer la montre dans une boutique partenaire.
           </p>
@@ -54,13 +54,13 @@ function Confirmation() {
         <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8">
           <Link
             to="/dashboard"
-            className="bg-primary text-primary-foreground px-4 sm:px-6 py-3 rounded-md font-bold tracking-wider text-sm"
+            className="rounded-md bg-primary px-4 py-3 text-sm font-bold tracking-wider text-primary-foreground sm:px-6"
           >
             MON DASHBOARD
           </Link>
           <Link
             to="/"
-            className="border border-border px-4 sm:px-6 py-3 rounded-md font-bold tracking-wider text-sm hover:border-foreground"
+            className="rounded-md border border-border px-4 py-3 text-sm font-bold tracking-wider hover:border-foreground sm:px-6"
           >
             REVENIR AU CATALOGUE
           </Link>

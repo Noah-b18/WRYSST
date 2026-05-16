@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { Heart, Search, User, MapPin, ChevronDown, Menu } from "lucide-react";
 import { useAppStore } from "@/lib/store";
 import { brands } from "@/lib/watches";
-import { useState } from "react";
 
 import {
   DropdownMenu,
@@ -23,12 +22,14 @@ import {
 
 export function Header() {
   const { program, city, favorites, selectedBrand, setSelectedBrand } = useAppStore();
-  const [valeur, setValeur] = useState("");
   return (
     <>
       <header className="sticky top-0 z-50 bg-white border-b border-border">
-        <div className="site-container h-16 flex items-center justify-between gap-6">
-          <Link to="/" className="font-display font-bold text-xl tracking-[0.15em]">
+        <div className="site-container h-16 flex min-w-0 items-center justify-between gap-2 sm:gap-4 lg:gap-6">
+          <Link
+            to="/"
+            className="font-display shrink-0 font-bold text-lg tracking-[0.15em] sm:text-xl"
+          >
             WRYSST
           </Link>
           <div className="hidden md:flex flex-1 max-w-md mx-auto">
@@ -44,7 +45,7 @@ export function Header() {
 
               <div className="absolute right-2 top-1/2 -translate-y-1/2">
                 <DropdownMenu>
-                  <DropdownMenuTrigger className="flex items-center gap-1 text-sm bg-white rounded-full px-2.5 py-1.5 hover:border-boder">
+                  <DropdownMenuTrigger className="flex items-center gap-1 rounded-full bg-white px-2.5 py-1.5 text-sm hover:bg-secondary">
                     {selectedBrand}
                     <ChevronDown className="w-3 h-3" strokeWidth={1.5} />
                   </DropdownMenuTrigger>
@@ -59,30 +60,38 @@ export function Header() {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-1 sm:gap-3">
             <span
-              className={`hidden sm:inline-flex text-[10px] tracking-widest font-bold px-2.75 py-1.75 rounded ${program === "BLACK EDITION" ? "bg-black-edition text-black-edition-foreground" : "bg-primary text-primary-foreground"}`}
+              className={`hidden shrink-0 sm:inline-flex text-[10px] tracking-widest font-bold px-2.75 py-1.75 rounded ${program === "BLACK EDITION" ? "bg-black-edition text-black-edition-foreground" : "bg-primary text-primary-foreground"}`}
             >
               {program}
             </span>
-            <Link to="/dashboard" className="relative p-2 hover:bg-secondary rounded-full">
-              <Heart className="w-5 h-5" strokeWidth={1.5} />
+            <Link
+              to="/dashboard"
+              className="relative shrink-0 rounded-full p-2 hover:bg-secondary"
+              aria-label="Favoris"
+            >
+              <Heart className="h-5 w-5 shrink-0" strokeWidth={1.5} />
               {favorites.length > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 bg-primary text-primary-foreground text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
                   {favorites.length}
                 </span>
               )}
             </Link>
-            <Link to="/dashboard" className="p-2 hover:bg-secondary rounded-full">
-              <User className="w-5 h-5" strokeWidth={1.5} />
+            <Link
+              to="/dashboard"
+              className="shrink-0 rounded-full p-2 hover:bg-secondary"
+              aria-label="Compte"
+            >
+              <User className="h-5 w-5 shrink-0" strokeWidth={1.5} />
             </Link>
           </div>
           {/* Mobile menu trigger */}
-          <div className="md:hidden ml-2">
+          <div className="ml-1 shrink-0 md:hidden">
             <Drawer>
               <DrawerTrigger asChild>
-                <button className="p-2 rounded-full hover:bg-secondary">
-                  <Menu className="w-5 h-5" />
+                <button className="shrink-0 rounded-full p-2 hover:bg-secondary">
+                  <Menu className="h-5 w-5 shrink-0" />
                 </button>
               </DrawerTrigger>
               <DrawerContent>
@@ -90,7 +99,9 @@ export function Header() {
                   <div className="flex items-center justify-between w-full">
                     <DrawerTitle>Menu</DrawerTitle>
                     <DrawerClose asChild>
-                      <button className="p-2 rounded-full hover:bg-secondary">Fermer</button>
+                      <button className="shrink-0 rounded-full p-2 hover:bg-secondary">
+                        Fermer
+                      </button>
                     </DrawerClose>
                   </div>
                   <DrawerDescription>Navigation et recherche</DrawerDescription>
@@ -129,10 +140,12 @@ export function Header() {
         </div>
       </header>
       <div className="bg-primary text-primary-foreground text-sm">
-        <div className="site-container py-2 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4" strokeWidth={1.5} />
-            <span>{city} — montres disponibles dans votre ville</span>
+        <div className="site-container flex flex-col gap-2 py-2 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-center gap-2">
+            <MapPin className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+            <span className="text-xs leading-snug sm:text-sm">
+              {city} — montres disponibles dans votre ville
+            </span>
           </div>
           <CityChanger />
         </div>
@@ -151,7 +164,7 @@ function CityChanger() {
   ];
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-1 text-sm text-black bg-white rounded-full px-3 py-1.25 hover:text-foreground">
+      <DropdownMenuTrigger className="flex shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1.25 text-sm text-black hover:text-foreground">
         {city}
         <ChevronDown className="w-3 h-3" strokeWidth={1.5} />
       </DropdownMenuTrigger>

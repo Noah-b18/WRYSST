@@ -14,7 +14,7 @@ function Recap() {
 
   return (
     <div className="min-h-screen bg-secondary">
-      <div className="site-container py-12">
+      <div className="site-container py-8 sm:py-12">
         <div className="max-w-xl mx-auto text-center">
           <h1 className="font-display font-bold text-3xl md:text-4xl uppercase tracking-tight">
             Votre résumé Wrysst
@@ -22,14 +22,18 @@ function Recap() {
           <p className="text-sm text-muted-foreground mt-2">Vérifiez avant de confirmer.</p>
         </div>
 
-        <div className="max-w-xl mx-auto bg-white rounded-lg shadow-sm border border-border mt-8 p-8">
-          <div className="flex items-center gap-4 pb-6 border-b border-border">
-            <img src={watch.image} alt="" className="w-16 h-16 rounded-full object-cover" />
-            <div>
+        <div className="mx-auto mt-8 max-w-xl rounded-lg border border-border bg-white p-4 shadow-sm sm:p-8">
+          <div className="flex items-center gap-4 border-b border-border pb-6">
+            <img
+              src={watch.image}
+              alt=""
+              className="h-16 w-16 shrink-0 rounded-full object-cover"
+            />
+            <div className="min-w-0">
               <p className="text-[10px] tracking-widest font-bold text-muted-foreground">
                 {watch.brand}
               </p>
-              <p className="font-display font-bold text-lg uppercase">{watch.model}</p>
+              <p className="font-display truncate text-lg font-bold uppercase">{watch.model}</p>
               <p className="text-xs text-muted-foreground">Réf. {watch.ref}</p>
             </div>
           </div>
@@ -82,10 +86,10 @@ function Row({
   highlight?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between py-3 border-b border-border last:border-0">
+    <div className="flex flex-col gap-1 border-b border-border py-3 last:border-0 sm:flex-row sm:items-center sm:justify-between">
       <span className="text-xs tracking-widest font-bold text-muted-foreground">{k}</span>
       <span
-        className={`text-sm ${bold ? "font-bold text-base" : ""} ${highlight ? "bg-black-edition text-black-edition-foreground px-2 py-0.5 rounded text-[10px] font-bold tracking-widest" : ""}`}
+        className={`break-words text-sm sm:text-right ${bold ? "text-base font-bold" : ""} ${highlight ? "bg-black-edition text-black-edition-foreground px-2 py-0.5 rounded text-[10px] font-bold tracking-widest" : ""}`}
       >
         {v}
       </span>

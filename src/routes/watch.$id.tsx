@@ -2,7 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { watches } from "@/lib/watches";
 import { useAppStore } from "@/lib/store";
-import { useState } from "react";
 import { Shield, Sparkles, Truck, Wrench, MapPin } from "lucide-react";
 
 export const Route = createFileRoute("/watch/$id")({
@@ -14,8 +13,6 @@ function WatchDetail() {
   const watch = watches.find((w) => w.id === id);
   const navigate = useNavigate();
   const { city, setSelectedWatch, setHasAccount } = useAppStore();
-  const [duration, setDuration] = useState(6);
-  const [deposit, setDeposit] = useState(500);
 
   if (!watch) return <div className="p-12 text-center">Montre introuvable</div>;
   const inZone = watch.city === city;
@@ -27,10 +24,10 @@ function WatchDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-50">
+    <div className="min-h-screen bg-white pb-64 sm:pb-44">
       <Header />
-      <div className="site-container py-10 grid grid-cols-1 lg:grid-cols-[55%_45%] gap-12">
-        <div>
+      <div className="site-container grid grid-cols-1 gap-8 py-6 sm:py-10 lg:grid-cols-[minmax(0,55%)_minmax(0,45%)] lg:gap-12">
+        <div className="min-w-0">
           <div className="aspect-square bg-secondary rounded-lg overflow-hidden">
             <img
               src={watch.image}
@@ -50,9 +47,9 @@ function WatchDetail() {
           </div>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className="text-xs tracking-widest font-medium text-muted-foreground">{watch.brand}</p>
-          <h1 className="font-display font-bold text-4xl md:text-5xl uppercase mt-1 tracking-tight">
+          <h1 className="font-display mt-1 text-3xl font-bold uppercase tracking-tight sm:text-4xl md:text-5xl">
             {watch.model}
           </h1>
           <p className="text-sm text-muted-foreground mt-2">
@@ -65,9 +62,9 @@ function WatchDetail() {
           </span>
 
           <div
-            className={`mt-6 p-4 rounded-lg flex items-center gap-2 ${inZone ? "bg-success text-success-foreground" : "bg-orange-50 text-orange-800"}`}
+            className={`mt-6 flex items-start gap-2 rounded-lg p-4 ${inZone ? "bg-success text-success-foreground" : "bg-orange-50 text-orange-800"}`}
           >
-            <MapPin className="w-4 h-4" strokeWidth={1.5} />
+            <MapPin className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.5} />
             <p className="text-sm font-medium">
               {inZone
                 ? `DISPONIBLE À ${city.toUpperCase()} — Retrait ou livraison 48H`
@@ -86,7 +83,7 @@ function WatchDetail() {
             ].map(([k, v]) => (
               <div
                 key={k}
-                className="flex justify-between items-center text-sm border-b border-border pb-2"
+                className="flex flex-col gap-1 border-b border-border pb-2 text-sm sm:flex-row sm:items-center sm:justify-between"
               >
                 <span className="text-muted-foreground">{k}</span>
                 <span className="font-medium">{v}</span>
@@ -160,8 +157,8 @@ function WatchDetail() {
 
       {/* Sticky reserve bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.06)] z-40 safe-bottom">
-        <div className="site-container py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
+        <div className="site-container flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-4">
+          <div className="min-w-0">
             <p className="text-[10px] tracking-widest font-medium text-muted-foreground">
               MENSUALITÉ
             </p>
@@ -170,16 +167,16 @@ function WatchDetail() {
               <span className="text-sm font-normal text-muted-foreground">/ mois</span>
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="grid gap-2 sm:flex sm:flex-row">
             <button
               onClick={() => handleReserve(true)}
-              className="bg-foreground text-background px-4 sm:px-6 py-3 rounded-md text-sm font-bold tracking-wider hover:bg-foreground/90 transition"
+              className="rounded-md bg-foreground px-4 py-3 text-sm font-bold tracking-wider text-background transition hover:bg-foreground/90 sm:px-6"
             >
               RÉSERVER (J'AI UN COMPTE) →
             </button>
             <button
               onClick={() => handleReserve(false)}
-              className="bg-primary text-primary-foreground px-4 sm:px-6 py-3 rounded-md text-sm font-bold tracking-wider hover:bg-primary/90 transition"
+              className="rounded-md bg-primary px-4 py-3 text-sm font-bold tracking-wider text-primary-foreground transition hover:bg-primary/90 sm:px-6"
             >
               RÉSERVER (NOUVEAU) →
             </button>

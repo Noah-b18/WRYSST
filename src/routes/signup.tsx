@@ -31,9 +31,9 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center px-4 py-10">
+    <div className="flex min-h-screen flex-col items-center bg-white px-4 py-6 sm:py-10">
       {/* progress */}
-      <div className="flex items-center gap-3 mb-12">
+      <div className="mb-8 flex max-w-full items-center gap-2 overflow-hidden sm:mb-12 sm:gap-3">
         {[1, 2, 3].map((n) => (
           <div key={n} className="flex items-center gap-3">
             <div
@@ -41,15 +41,19 @@ function Signup() {
             >
               {step > n ? <Check className="w-4 h-4" /> : n}
             </div>
-            {n < 3 && <div className={`w-12 h-0.5 ${step > n ? "bg-primary" : "bg-border"}`} />}
+            {n < 3 && (
+              <div className={`h-0.5 w-8 sm:w-12 ${step > n ? "bg-primary" : "bg-border"}`} />
+            )}
           </div>
         ))}
       </div>
 
-      <div className="w-full flex-1 flex justify-center">
+      <div className="flex w-full flex-1 justify-center">
         {step === 1 && (
-          <div className="max-w-[480px]">
-            <h1 className="font-display font-bold text-4xl uppercase">Créez votre compte</h1>
+          <div className="w-full max-w-[480px]">
+            <h1 className="font-display text-3xl font-bold uppercase sm:text-4xl">
+              Créez votre compte
+            </h1>
             <p className="text-sm text-muted-foreground mt-2">Accès réservé aux membres Wrysst.</p>
             <form
               onSubmit={(e) => {
@@ -58,7 +62,7 @@ function Signup() {
               }}
               className="space-y-5 mt-8"
             >
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <Field label="PRÉNOM">
                   <input className="input" required />
                 </Field>
@@ -76,11 +80,22 @@ function Signup() {
                   </select>
                   <select className="input">
                     <option>Mois</option>
-                    {["Jan", "Fév", "Mar", "Avr", "Mai", "Jun", "Jul", "Aoû", "Sep", "Oct", "Nov", "Déc"].map(
-                      (m) => (
-                        <option key={m}>{m}</option>
-                      ),
-                    )}
+                    {[
+                      "Jan",
+                      "Fév",
+                      "Mar",
+                      "Avr",
+                      "Mai",
+                      "Jun",
+                      "Jul",
+                      "Aoû",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Déc",
+                    ].map((m) => (
+                      <option key={m}>{m}</option>
+                    ))}
                   </select>
                   <select className="input">
                     <option>Année</option>
@@ -131,7 +146,9 @@ function Signup() {
 
         {step === 2 && (
           <div className="text-center max-w-[480px]">
-            <h1 className="font-display font-bold text-4xl uppercase">Où êtes-vous ?</h1>
+            <h1 className="font-display text-3xl font-bold uppercase sm:text-4xl">
+              Où êtes-vous ?
+            </h1>
             <p className="text-sm text-muted-foreground mt-2">
               Votre catalogue affichera en priorité les montres disponibles dans votre secteur.
             </p>
@@ -155,8 +172,17 @@ function Signup() {
                 {cities.map((c) => {
                   const active = selectedCity === c.name;
                   return (
-                    <g key={c.name} className="cursor-pointer" onClick={() => setSelectedCity(c.name)}>
-                      <circle cx={c.x} cy={c.y} r={active ? 12 : 7} fill={active ? "#0047FF" : "#0A0A0A"} />
+                    <g
+                      key={c.name}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedCity(c.name)}
+                    >
+                      <circle
+                        cx={c.x}
+                        cy={c.y}
+                        r={active ? 12 : 7}
+                        fill={active ? "#0047FF" : "#0A0A0A"}
+                      />
                       <text
                         x={c.x}
                         y={c.y - 16}
@@ -184,7 +210,9 @@ function Signup() {
         {step === 3 && (
           <div className="w-full max-w-5xl">
             <div className="text-center px-4 sm:px-6">
-              <h1 className="font-display font-bold text-3xl sm:text-4xl uppercase">Votre niveau d'accès</h1>
+              <h1 className="font-display font-bold text-3xl sm:text-4xl uppercase">
+                Votre niveau d'accès
+              </h1>
               <p className="text-sm text-muted-foreground mt-2 max-w-sm mx-auto">
                 Vous pourrez le modifier à tout moment.
               </p>
@@ -226,8 +254,12 @@ function Signup() {
                       >
                         Programme
                       </div>
-                      <div className="font-display mt-2 text-2xl font-bold uppercase leading-tight">{p.name}</div>
-                      <div className={`mt-2 text-sm ${isBlack ? "text-white/70" : "text-muted-foreground"}`}>
+                      <div className="font-display mt-2 text-2xl font-bold uppercase leading-tight">
+                        {p.name}
+                      </div>
+                      <div
+                        className={`mt-2 text-sm ${isBlack ? "text-white/70" : "text-muted-foreground"}`}
+                      >
                         {p.tagline}
                       </div>
                     </div>

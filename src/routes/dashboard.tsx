@@ -32,27 +32,29 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <div className="site-container py-10 grid lg:grid-cols-[260px_1fr] gap-10">
-        <aside>
-          <nav className="flex lg:flex-col gap-1 overflow-x-auto">
+      <div className="site-container grid gap-6 py-6 sm:py-10 lg:grid-cols-[260px_1fr] lg:gap-10">
+        <aside className="min-w-0">
+          <nav className="flex gap-1 overflow-x-auto lg:flex-col">
             {nav.map((n) => (
               <button
                 key={n.id}
                 onClick={() => setTab(n.id)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-md text-xs font-bold tracking-wider whitespace-nowrap transition ${tab === n.id ? "bg-foreground text-background" : "hover:bg-secondary"}`}
+                className={`flex shrink-0 items-center gap-3 rounded-md px-4 py-3 text-xs font-bold tracking-wider whitespace-nowrap transition ${tab === n.id ? "bg-foreground text-background" : "hover:bg-secondary"}`}
               >
-                <n.icon className="w-4 h-4" strokeWidth={1.5} />
+                <n.icon className="h-4 w-4 shrink-0" strokeWidth={1.5} />
                 {n.label}
               </button>
             ))}
           </nav>
         </aside>
 
-        <main>
+        <main className="min-w-0">
           {tab === "current" && (
             <div>
-              <h1 className="font-display font-bold text-3xl uppercase mb-6">Ma montre en cours</h1>
-              <div className="grid md:grid-cols-[1fr_1.2fr] gap-8 bg-secondary rounded-lg p-8">
+              <h1 className="font-display mb-6 text-2xl font-bold uppercase sm:text-3xl">
+                Ma montre en cours
+              </h1>
+              <div className="grid gap-5 rounded-lg bg-secondary p-4 sm:p-6 md:grid-cols-[1fr_1.2fr] md:gap-8 lg:p-8">
                 <img
                   src={current.image}
                   alt=""
@@ -62,13 +64,13 @@ function Dashboard() {
                   <p className="text-[10px] tracking-widest font-bold text-muted-foreground">
                     {current.brand}
                   </p>
-                  <h2 className="font-display font-bold text-3xl uppercase mt-1">
+                  <h2 className="font-display mt-1 text-2xl font-bold uppercase sm:text-3xl">
                     {current.model}
                   </h2>
                   <p className="text-sm text-muted-foreground mt-1">Réf. {current.ref}</p>
                   <p className="text-sm mt-4">Depuis le 09/05/2026</p>
                   <button
-                    className="mt-6 bg-primary text-primary-foreground px-4 sm:px-6 py-3 rounded-md font-bold tracking-wider text-sm self-start"
+                    className="mt-6 w-full rounded-md bg-primary px-4 py-3 text-sm font-bold tracking-wider text-primary-foreground sm:w-auto sm:px-6"
                     onClick={() => setTab("swap")}
                   >
                     CHANGER DE MONTRE →
@@ -84,7 +86,7 @@ function Dashboard() {
 
           {tab === "swap" && (
             <div className="max-w-xl">
-              <h1 className="font-display font-bold text-3xl uppercase mb-6">
+              <h1 className="font-display mb-6 text-2xl font-bold uppercase sm:text-3xl">
                 Demander un échange
               </h1>
               <div className="space-y-4">
@@ -97,7 +99,7 @@ function Dashboard() {
                   placeholder="Préférences pour la prochaine montre ?"
                   className="w-full border border-border rounded-md p-3 text-sm h-24 outline-none focus:border-primary"
                 />
-                <button className="bg-primary text-primary-foreground px-4 sm:px-6 py-3 rounded-md font-bold tracking-wider text-sm">
+                <button className="w-full rounded-md bg-primary px-4 py-3 text-sm font-bold tracking-wider text-primary-foreground sm:w-auto sm:px-6">
                   VALIDER MON ÉCHANGE →
                 </button>
               </div>
@@ -106,7 +108,9 @@ function Dashboard() {
 
           {tab === "fav" && (
             <div>
-              <h1 className="font-display font-bold text-3xl uppercase mb-6">Mes favoris</h1>
+              <h1 className="font-display mb-6 text-2xl font-bold uppercase sm:text-3xl">
+                Mes favoris
+              </h1>
               {favs.length === 0 ? (
                 <p className="text-muted-foreground text-sm">
                   Aucun favori.{" "}
@@ -126,7 +130,9 @@ function Dashboard() {
 
           {tab === "prog" && (
             <div className="max-w-md">
-              <h1 className="font-display font-bold text-3xl uppercase mb-6">Mon programme</h1>
+              <h1 className="font-display mb-6 text-2xl font-bold uppercase sm:text-3xl">
+                Mon programme
+              </h1>
               <div
                 className={`p-8 rounded-lg ${program === "BLACK EDITION" ? "bg-black-edition text-black-edition-foreground" : "bg-secondary"}`}
               >

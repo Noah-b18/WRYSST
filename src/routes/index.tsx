@@ -80,7 +80,7 @@ function Catalogue() {
       </div>
 
       {/* Grid */}
-      <main className="site-container py-8">
+      <main className="site-container py-6 sm:py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {inZone.map((w) => (
             <WatchCard key={w.id} watch={w} />
@@ -88,8 +88,8 @@ function Catalogue() {
         </div>
 
         {outZone.length > 0 && (
-          <section className="mt-16">
-            <h2 className="font-display font-bold text-xl tracking-wider mb-6">
+          <section className="mt-12 sm:mt-16">
+            <h2 className="font-display mb-6 text-lg font-bold uppercase tracking-wider sm:text-xl">
               ÉGALEMENT DISPONIBLE — AUTRES VILLES
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
